@@ -17,6 +17,7 @@
   "strict": true,
   "sub": true,
   "undef": true,
+  "validthis": true,
   "globals": {
     "module": true,
     "require": true

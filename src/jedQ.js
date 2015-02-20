@@ -30,7 +30,6 @@ jedQ.version = '0.1.0';
  */
 
 function jedQCore(cb) {
-  /*jshint validthis:true */  
   this.stacks = [{
     _type: 'async',
     _cb: cb
