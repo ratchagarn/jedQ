@@ -17,7 +17,7 @@ JavaScript Library for handle process queue for mitigate “Pyramid of Doom”
 
 ### Example
 
-```javacript
+```javascript
 
 jedQ(function(next) {
     console.log('First call');
