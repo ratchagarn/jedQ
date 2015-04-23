@@ -1,6 +1,6 @@
 {
   "name": "jedQ",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "JavaScript Library for handle process queue for mitigate “Pyramid of Doom”",
   "main": "Gruntfile.js",
   "repository": {

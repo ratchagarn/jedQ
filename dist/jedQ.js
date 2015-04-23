@@ -1,5 +1,5 @@
 /*!
- * jedQ version 0.1.0
+ * jedQ version 0.2.0
  * Copyright 2015-Preset
  * Author: Ratchagarn Naewbuntad
  * Licensed under MIT
@@ -78,7 +78,7 @@ jedQCore.prototype.done = function() {
    * @name _resolveStack
    * @param {Any} data for pass to next queue
    */
-  
+
   var _resolveStack = function(data) {
 
     // get first callback stack
