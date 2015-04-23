@@ -4,10 +4,14 @@ jedQ
 JavaScript Library for handle process queue for mitigate “Pyramid of Doom”
 
 
-## VERSION 0.1.0
+## VERSION 0.2.0
 
 
 ## Change log
+
+### 0.2.0
+
+- Change way to using this library (Remove arguments `async` force you to use next for execute next queue)
 
 
 ### 0.1.0
@@ -26,9 +30,9 @@ jedQ(function(next) {
   // use `then` function for stack queue
   // and if not `async` you not to use next function to go next queue
   // `jedQ` automatic handle `sync` queue for you
-  .then(function(data) {
+  .then(function(next, data) {
     console.log('Queue 1,', 'Data from `first call` =>', data);
-    return 2000; // send `data` to next queue
+    next(2000); // send `data` to next queue
   })
   .then(function(next, data) {
     setTimeout(function() {
@@ -37,7 +41,7 @@ jedQ(function(next) {
       // and send `data` to next queue
       next(3000);
     }, 1000);
-  }, true) // set `true` for tell this queue is `async`
+  })
   .then(function(data) {
     console.log('Queue 3,', 'Data from `queue 2` =>', data);
   })

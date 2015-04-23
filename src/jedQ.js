@@ -19,7 +19,7 @@ function jedQ(cb) {
 }
 
 // define curret version
-jedQ.version = '0.1.0';
+jedQ.version = '0.2.0';
 
 
 /**
@@ -29,10 +29,9 @@ jedQ.version = '0.1.0';
  * @param {Function} function for call first
  */
 
-function jedQCore(cb) {
+function jedQCore(_callback) {
   this.stacks = [{
-    _type: 'async',
-    _cb: cb
+    _callback: _callback
   }];
 }
 
@@ -45,15 +44,10 @@ function jedQCore(cb) {
  * @return {Object} jedQCore object for chaining method
  */
 
-jedQCore.prototype.then = function(cb, is_async) {
-  // check callback type
-  var type = 'sync';
-  if (is_async) { type = 'async'; }
-
+jedQCore.prototype.then = function(callback) {
   // add to stack
   this.stacks.push({
-    _type: type,
-    _cb: cb
+    _callback: callback
   });
 
   return this;
@@ -68,33 +62,25 @@ jedQCore.prototype.then = function(cb, is_async) {
 
 jedQCore.prototype.done = function() {
 
-  var all_stacks = this.stacks;
+  var allStacks = this.stacks;
 
   /**
    * Create sub function for execute all callback function in queue
    * by recursive function
+   * (this is `next` first argument of `then` method)
    * ------------------------------------------------------------
    * @name _resolveStack
    * @param {Any} data for pass to next queue
    */
-  
+
   var _resolveStack = function(data) {
 
     // get first callback stack
-    var stack = all_stacks.shift();
+    var stack = allStacks.shift();
 
-    if (stack != null && typeof stack._cb === 'function') {
-
-      // execute callback type `sync` and auto go to next queue
-      if (stack._type === 'sync') {
-        _resolveStack( stack._cb(data) );
-      }
-      // execute callback type `async` and send function for
-      // manual go to next queue
-      else if (stack._type === 'async') {
-        stack._cb(_resolveStack, data);
-      }
-
+    if (stack != null && typeof stack._callback === 'function') {
+      // execute queue
+      stack._callback(_resolveStack, data);
     }
 
     return _resolveStack;
