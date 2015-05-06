@@ -93,11 +93,18 @@ jedQCore.prototype.done = function() {
 
 /**
  * ------------------------------------------------------------
- * Assign to global scope
+ * Exports jedQ
  * ------------------------------------------------------------
  */
 
-// in browser `global` it must be `window` object
-global.jedQ = jedQ;
+if (typeof window != null) {
+  // in browser `global` it must be `window` object
+  global.jedQ = jedQ;
+}
+// CommonJS
+else if (typeof module != null && typeof module.exports != null) {
+  module.exports = jedQ;
+}
+
 
 }).call(this);
