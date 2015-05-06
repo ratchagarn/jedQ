@@ -97,14 +97,13 @@ jedQCore.prototype.done = function() {
  * ------------------------------------------------------------
  */
 
-if (typeof window != null) {
+// check CommonJS first
+if (typeof module != null && typeof module.exports != null) {
+  module.exports = jedQ;
+}
+else if (typeof window != null) {
   // in browser `global` it must be `window` object
   global.jedQ = jedQ;
 }
-// CommonJS
-else if (typeof module != null && typeof module.exports != null) {
-  module.exports = jedQ;
-}
-
 
 }).call(this);
