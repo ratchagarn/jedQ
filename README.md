@@ -4,10 +4,14 @@ jedQ
 JavaScript Library for handle process queue for mitigate “Pyramid of Doom”
 
 
-## VERSION 0.2.0
+## VERSION 0.2.1
 
 
 ## Change log
+
+### 0.2.1
+- Add code for support CommonJS
+
 
 ### 0.2.0
 
